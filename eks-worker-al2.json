@@ -133,6 +133,13 @@
     {
       "type": "shell",
       "remote_folder": "{{ user `remote_folder`}}",
+      "inline": [
+        "sudo yum install -y https://s3.{{user `aws_region`}}.amazonaws.com/amazon-ssm-{{user `aws_region`}}/latest/linux_amd64/amazon-ssm-agent.rpm && sudo systemctl enable amazon-ssm-agent"
+      ]
+    },
+    {
+      "type": "shell",
+      "remote_folder": "{{ user `remote_folder`}}",
       "script": "{{template_dir}}/scripts/install-worker.sh",
       "environment_vars": [
         "KUBERNETES_VERSION={{user `kubernetes_version`}}",
